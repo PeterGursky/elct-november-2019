@@ -1,0 +1,28 @@
+<table class="table table-hover">
+    <thead>
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>e-mail</th>
+      <th>last login</th>
+      <th>active</th>
+      <th>groups</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users" (dblclick)="editUser(user)">
+      <td>{{user.id}}</td>
+      <td>{{user.name}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.lastLogin | date:'medium'}}</td>
+      <td>{{user.active}}</td>
+      <td><span *ngFor="let group of user.groups">{{group.name}}, </span></td>
+    </tr>
+    </tbody>
+  </table>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userEditModal" (click)="onAddUser()">
+    Add user
+  </button>
+
+  <app-user-edit (onSave)="saveUser($event)" [user]="editedUser"></app-user-edit>
