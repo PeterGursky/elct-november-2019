@@ -72,7 +72,13 @@ export class UserServerService {
     return this.http.get<Group[]>(this.url + 'groups')
       .pipe(catchError(error => this.processHttpError(error)));
   }
-  
+  public deleteUser(user: User):Observable<boolean> {
+    return this.http.delete<boolean>
+    (this.url + "user/" + user.id+ "/" + this.token)
+    .pipe(map(_ => true),
+    catchError(error => this.processHttpError(error)));;
+    }
+
   login(auth: Auth):Observable<boolean> {
     return this.http.post(this.url + 'login', auth, {responseType: "text"})
     .pipe(

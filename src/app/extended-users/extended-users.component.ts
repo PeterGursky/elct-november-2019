@@ -34,4 +34,12 @@ export class ExtendedUsersComponent implements OnInit {
     this.editedUser = {...user};
     $('#userEditModal').modal('show');
   }
+
+  deleteUser(user:User) {
+    this.userServerService.deleteUser(user).subscribe(ok => {
+      if (ok) {
+        this.users = this.users.filter(u => u.id!== user.id);
+      }
+    });
+  }
 }
